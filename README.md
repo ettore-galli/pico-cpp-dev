@@ -1,2 +1,7 @@
 # pico-cpp-dev
-RPI Pico c++ dev
+
+Raspberry pi pico development woth c++ SDK
+
+## Environment setup
+
+```setup/sdk-setup.sh```
