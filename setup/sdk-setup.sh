@@ -12,3 +12,10 @@ sudo apt update
 sudo apt install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential
 
 sudo apt install g++ libstdc++-arm-none-eabi-newlib
+
+sudo apt install python3
+
+
+# picotool
+git clone https://github.com/raspberrypi/picotool.git
+cd picotool
