@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "iosfwd": "cpp"
     },
     "cmake.sourceDirectory": "/workspaces/pico-cpp-dev/pico-examples"
 }
