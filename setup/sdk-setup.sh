@@ -15,6 +15,8 @@ sudo apt install g++ libstdc++-arm-none-eabi-newlib
 
 sudo apt install python3
 
+sudo apt install tar 
+
 
 # picotool
 git clone https://github.com/raspberrypi/picotool.git
