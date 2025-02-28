@@ -17,6 +17,7 @@ sudo apt install python3
 
 sudo apt install tar 
 
+sudo apt install libusb-1.0-0-dev
 
 # picotool
 git clone https://github.com/raspberrypi/picotool.git
