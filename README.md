@@ -11,6 +11,10 @@ Raspberry pi pico development woth c++ SDK
 
 ```setup/sdk-setup.sh```
 
+## Reset/Bootsel
+
+<https://www.raspberrypi.com/news/how-to-add-a-reset-button-to-your-raspberry-pi-pico/>
+
 ## Environment one time setup
 
 ## Project one time setup

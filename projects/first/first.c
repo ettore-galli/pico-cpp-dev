@@ -4,7 +4,8 @@
 #include "pico/binary_info.h"
 
 const uint LED_PIN = 15;
-const uint DELAY = 100;
+const uint DELAY_ON = 1000;
+const uint DELAY_OFF = 5000;
 int main()
 {
 
@@ -18,9 +19,9 @@ int main()
     while (1)
     {
         gpio_put(LED_PIN, 0);
-        sleep_ms(DELAY);
+        sleep_ms(DELAY_OFF);
         gpio_put(LED_PIN, 1);
         puts("Hello World\n");
-        sleep_ms(DELAY);
+        sleep_ms(DELAY_ON);
     }
 }
