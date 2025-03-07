@@ -1,0 +1,12 @@
+.program pio_blink
+
+; Configura il pin come output
+set pindirs, 1
+
+; Loop infinito per far lampeggiare il LED
+loop:
+    set pins, 1    ; Accendi il LED
+    nop [31]       ; Ritardo  
+    set pins, 0    ; Spegni il LED
+    nop [31]       ; Ritardo  
+    jmp loop       ; Ripeti il loop

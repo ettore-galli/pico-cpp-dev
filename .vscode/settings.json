@@ -2,7 +2,8 @@
     "files.associations": {
         "stdlib.h": "c",
         "iosfwd": "cpp",
-        "gpio.h": "c"
+        "gpio.h": "c",
+        "stdio.h": "c"
     },
     "cmake.sourceDirectory": "/workspaces/pico-cpp-dev/pico-examples"
 }
