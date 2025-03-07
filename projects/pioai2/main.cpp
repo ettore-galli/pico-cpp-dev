@@ -12,7 +12,7 @@ void pio_blink_program_init(PIO pio, uint sm, uint offset, uint pin) {
     // Configura la macchina a stati
     pio_sm_config c = pio_blink_program_get_default_config(offset);
     sm_config_set_set_pins(&c, pin, 1); // Imposta il pin di output
-    sm_config_set_clkdiv(&c, 31250);   // Frequenza di 1 Hz (125 MHz / 31250 = 4000 Hz, poi diviso ulteriormente dal loop PIO)
+    sm_config_set_clkdiv(&c, 125000000);   // Frequenza di 1 Hz (125 MHz / 31250 = 4000 Hz, poi diviso ulteriormente dal loop PIO)
     pio_sm_init(pio, sm, offset, &c);
 
     // Avvia la macchina a stati
