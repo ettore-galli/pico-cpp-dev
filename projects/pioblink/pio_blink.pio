@@ -1,0 +1,21 @@
+.program pio_blink
+
+; Configura il pin come output
+set pindirs, 1
+
+.wrap_target
+
+; --------------------
+pull
+    set pins, 0     
+    mov x, osr
+wait0:
+    jmp x--, wait0
+; --------------------
+pull
+    set pins, 1    
+    mov x, osr
+wait1:
+    jmp x--, wait1
+; --------------------
+.wrap       
