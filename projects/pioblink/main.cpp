@@ -50,7 +50,7 @@ int main()
     while (true)
     {
         // Puoi aggiungere ulteriori operazioni di debug qui se necessario
-        sleep_ms(1000); // Attendi 1 secondo
+        sleep_ms(100); // Attendi 1 secondo
 
         if (delay > 1)
         {
@@ -60,16 +60,6 @@ int main()
         {
             delay = 30;
         }
-        printf("pio_sm_put(%d) \n",delay);
         pio_sm_put(pio, sm, delay);
-        // if (!pio_sm_is_tx_fifo_full(pio, sm))
-        // {
-        //     pio_sm_put(pio, sm, delay);
-        //     printf("put delay: %d\n", delay);
-        // } else {
-        //     printf("tx fifo full [push %d failed]\n",delay);
-        // }
-
-        
-    }
+      }
 }
