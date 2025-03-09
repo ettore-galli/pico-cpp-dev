@@ -34,9 +34,9 @@ int main()
     pio_blink_program_init(pio, sm, offset, 15);
 
     // Imposta la frequenza desiderata (10 Hz)
-    float freq = 10000.0f;                     // Frequenza in Hz
+    float base_step_freq = 100000.0f;          // Frequenza in Hz
     uint32_t clock_hz = clock_get_hz(clk_sys); // Frequenza di clock del sistema
-    uint32_t divider = clock_hz / (freq * 2);  // Divisore per ottenere la frequenza desiderata
+    uint32_t divider = clock_hz / (base_step_freq * 2);  // Divisore per ottenere la frequenza desiderata
     // pio_sm_set_clkdiv_int_frac(pio, sm, divider, 0);
     // sm_config_set_clkdiv(&pio->c, 1250000000.0);
     pio_sm_set_clkdiv(pio, sm, divider);
@@ -45,21 +45,31 @@ int main()
     printf("PIO program loaded and running. LED should blink on pin 15.\n");
 
     // Loop infinito
-    uint32_t delay = 15;
+    uint32_t delay = 1;
+
+    float BASE = 110.0f;
+    float freq = 0.0f;
+    uint8_t harmonic = 1;
+    const uint8_t NUM_OF_HARMONICS = 15;
 
     while (true)
     {
         // Puoi aggiungere ulteriori operazioni di debug qui se necessario
-        sleep_ms(100); // Attendi 1 secondo
-
-        if (delay > 1)
-        {
-            delay = delay - 1;
+        sleep_ms(500); // Attendi 1 secondo
+        harmonic ++;
+        if (harmonic > NUM_OF_HARMONICS){
+            harmonic = 1;
         }
-        else
-        {
-            delay = 30;
-        }
+        freq = BASE * harmonic;
+        delay = (uint32_t)(base_step_freq / freq) / 2.0;
+        // if (delay > 1)
+        // {
+        //     delay = delay - 1;
+        // }
+        // else
+        // {
+        //     delay = 30;
+        // }
         pio_sm_put(pio, sm, delay);
       }
 }
