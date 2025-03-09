@@ -5,17 +5,21 @@ set pindirs, 1
 
 .wrap_target
 
+pull noblock
+; mov osr, x
+mov x, osr
+
 ; --------------------
-pull
+; pull ifempty
+    mov y, x
     set pins, 0     
-    mov x, osr
 wait0:
-    jmp x--, wait0
+    jmp y--, wait0
 ; --------------------
-pull
+; pull ifempty
+    mov y, x
     set pins, 1    
-    mov x, osr
 wait1:
-    jmp x--, wait1
+    jmp y--, wait1
 ; --------------------
 .wrap       

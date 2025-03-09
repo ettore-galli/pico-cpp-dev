@@ -45,24 +45,31 @@ int main()
     printf("PIO program loaded and running. LED should blink on pin 15.\n");
 
     // Loop infinito
-    uint32_t delay = 5000;
+    uint32_t delay = 15;
 
     while (true)
     {
         // Puoi aggiungere ulteriori operazioni di debug qui se necessario
-        sleep_ms(100); // Attendi 1 secondo
+        sleep_ms(1000); // Attendi 1 secondo
 
-        if (delay > 300)
+        if (delay > 1)
         {
-            delay = delay - 100;
+            delay = delay - 1;
         }
         else
         {
-            delay = 5000;
+            delay = 30;
         }
+        printf("pio_sm_put(%d) \n",delay);
+        pio_sm_put(pio, sm, delay);
+        // if (!pio_sm_is_tx_fifo_full(pio, sm))
+        // {
+        //     pio_sm_put(pio, sm, delay);
+        //     printf("put delay: %d\n", delay);
+        // } else {
+        //     printf("tx fifo full [push %d failed]\n",delay);
+        // }
 
-        pio_sm_put_blocking(pio, sm, delay);
-
-        printf("%d\n", clock_get_hz(clk_sys));
+        
     }
 }
