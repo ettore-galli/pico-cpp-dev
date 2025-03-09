@@ -47,7 +47,7 @@ int main()
     // Loop infinito
     uint32_t delay = 1;
 
-    float BASE = 110.0f;
+    float BASE = 55.0f;
     float freq = 0.0f;
     uint8_t harmonic = 1;
     const uint8_t NUM_OF_HARMONICS = 15;
