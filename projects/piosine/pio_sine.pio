@@ -1,0 +1,21 @@
+.program pio_sine
+
+; Configura il pin come output
+set pindirs, 1
+
+.wrap_target
+
+    pull noblock
+    mov x, osr
+
+        mov y, x
+        set pins, 0     
+    wait0:
+        jmp y--, wait0
+
+        mov y, x
+        set pins, 1    
+    wait1:
+        jmp y--, wait1
+
+.wrap       
