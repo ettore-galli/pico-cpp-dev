@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/pio.h"
-#include "pio_sine.pio.h"
+#include "pio_sound.pio.h"
 #include "hardware/clocks.h"
 
 // Funzione per inizializzare il programma PIO
-void pio_sine_program_init(PIO pio, uint sm, uint offset, uint pin)
+void pio_sound_program_init(PIO pio, uint sm, uint offset, uint pin)
 {
     // Configura il pin come output
     pio_gpio_init(pio, pin);
     pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, true);
 
     // Configura la macchina a stati
-    pio_sm_config c = pio_sine_program_get_default_config(offset);
+    pio_sm_config c = pio_sound_program_get_default_config(offset);
     sm_config_set_set_pins(&c, pin, 1); // Imposta il pin di output
     pio_sm_init(pio, sm, offset, &c);
 
@@ -27,11 +27,11 @@ int main()
 
     // Seleziona il programma PIO e lo carica nella memoria PIO
     PIO pio = pio0;
-    uint offset = pio_add_program(pio, &pio_sine_program);
+    uint offset = pio_add_program(pio, &pio_sound_program);
 
     // Configura il pin 15 come output per il LED
     uint sm = pio_claim_unused_sm(pio, true);
-    pio_sine_program_init(pio, sm, offset, 15);
+    pio_sound_program_init(pio, sm, offset, 15);
 
     // Imposta la frequenza desiderata (10 Hz)
     float base_step_freq = 100000.0f;          // Frequenza in Hz
