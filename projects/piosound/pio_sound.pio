@@ -1,20 +1,17 @@
 .program pio_sound
 
-; Configura il pin come output
-set pindirs, 1
-
 .wrap_target
 
     pull noblock
     mov x, osr
 
         mov y, x
-        set pins, 0     
+        set pins, 0b0000     
     wait0:
         jmp y--, wait0
 
         mov y, x
-        set pins, 1    
+        set pins, 0b1111    
     wait1:
         jmp y--, wait1
 
