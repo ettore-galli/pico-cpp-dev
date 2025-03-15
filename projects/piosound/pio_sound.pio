@@ -6,13 +6,43 @@
     mov x, osr
 
         mov y, x
-        set pins, 0b0000     
+        set pins, 0b000     
     wait0:
         jmp y--, wait0
 
         mov y, x
-        set pins, 0b1111    
+        set pins, 0b100    
     wait1:
         jmp y--, wait1
+
+        mov y, x
+        set pins, 0b010    
+    wait2:
+        jmp y--, wait2
+
+        mov y, x
+        set pins, 0b110    
+    wait3:
+        jmp y--, wait3
+
+        mov y, x
+        set pins, 0b001     
+    wait4:
+        jmp y--, wait4
+
+        mov y, x
+        set pins, 0b101    
+    wait5:
+        jmp y--, wait5
+
+        mov y, x
+        set pins, 0b011    
+    wait6:
+        jmp y--, wait6
+
+        mov y, x
+        set pins, 0b111    
+    wait7:
+        jmp y--, wait7
 
 .wrap       
