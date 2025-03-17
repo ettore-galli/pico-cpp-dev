@@ -33,6 +33,11 @@ uint32_t calculate_delay(float base_step_freq, float freq)
     return (uint32_t)(base_step_freq / freq) / 2.0;
 }
 
+uint32_t calculate_divider(float base_step_freq, uint32_t clock_hz)
+{
+    return clock_hz / (base_step_freq * 2);
+}
+
 int main()
 {
     // Inizializza la libreria standard (per printf)
@@ -48,12 +53,9 @@ int main()
 
     pio_sound_program_init(pio, sm, offset, pins, 3);
 
-    // Imposta la frequenza desiderata (10 Hz)
-    float base_step_freq = 100000.0f;                   // Frequenza in Hz
-    uint32_t clock_hz = clock_get_hz(clk_sys);          // Frequenza di clock del sistema
-    uint32_t divider = clock_hz / (base_step_freq * 2); // Divisore per ottenere la frequenza desiderata
-    // pio_sm_set_clkdiv_int_frac(pio, sm, divider, 0);
-    // sm_config_set_clkdiv(&pio->c, 1250000000.0);
+    float base_step_freq = 100000.0f;
+
+    uint32_t divider =calculate_divider(base_step_freq, clock_get_hz(clk_sys));
     pio_sm_set_clkdiv(pio, sm, divider);
 
     // Loop infinito
