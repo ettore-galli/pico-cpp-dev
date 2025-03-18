@@ -62,19 +62,20 @@ int main()
     uint32_t delay = 1;
 
     float BASE = 55.0f;
-    float freq = 4 * BASE;
+    float freq = 3 * BASE;
     uint8_t harmonic = 1;
     const uint8_t NUM_OF_HARMONICS = 15;
 
     while (true)
     {
         sleep_ms(500);
-        // harmonic++;
-        // if (harmonic > NUM_OF_HARMONICS)
-        // {
-        //     harmonic = 1;
-        // }
-        // freq = BASE * harmonic;
+        
+        harmonic++;
+        if (harmonic > NUM_OF_HARMONICS)
+        {
+            harmonic = 1;
+        }
+        freq = BASE * harmonic;
 
         delay = calculate_delay(base_step_freq, freq);
         pio_sm_put(pio, sm, delay);
