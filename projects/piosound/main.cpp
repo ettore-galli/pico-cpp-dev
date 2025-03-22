@@ -39,6 +39,15 @@ uint32_t calculate_divider(float base_step_freq, uint32_t clock_hz)
     return clock_hz / (base_step_freq * 2);
 }
 
+uint16_t read_adc_average(uint8_t samples, uint8_t intra_sample_delay_ms) {
+    uint32_t sum = 0;
+    for (uint8_t i = 0; i < samples; i++) {
+        sleep_ms(intra_sample_delay_ms);
+        sum += adc_read();
+    }
+    return sum / samples;
+}
+
 int main()
 {
     // Inizializza la libreria standard (per printf)
@@ -68,22 +77,25 @@ int main()
     const uint8_t NUM_OF_HARMONICS = 15;
 
     adc_init();
-    // Seleziona il pin di input ADC (ad esempio, GPIO 26)
     adc_gpio_init(26);
-
-    // Seleziona il canale ADC (0 per GPIO 26, 1 per GPIO 27, ecc.)
     adc_select_input(0);
 
     while (true)
     {
-        sleep_ms(500);
+        sleep_ms(5);
+
+        uint16_t pitch_input = read_adc_average(10, 1);
+
+        printf("adc: %d\n", pitch_input);
         
-        harmonic++;
-        if (harmonic > NUM_OF_HARMONICS)
-        {
-            harmonic = 1;
-        }
-        freq = BASE * harmonic;
+        freq = (uint16_t)(BASE + 1000.0*(pitch_input/4096.0));
+
+        // harmonic++;
+        // if (harmonic > NUM_OF_HARMONICS)
+        // {
+            // harmonic = 1;
+        // }
+        // freq = BASE * harmonic;
 
         delay = calculate_delay(base_step_freq, freq);
         pio_sm_put(pio, sm, delay);
