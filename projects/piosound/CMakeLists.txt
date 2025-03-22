@@ -10,7 +10,7 @@ add_executable(pico_sound main.cpp)
 
 pico_generate_pio_header(pico_sound ${CMAKE_CURRENT_SOURCE_DIR}/pio_sound.pio)
 
-target_link_libraries(pico_sound pico_stdlib hardware_pio)
+target_link_libraries(pico_sound pico_stdlib hardware_pio hardware_adc)
 
 pico_enable_stdio_usb(pico_sound 1)
 pico_enable_stdio_uart(pico_sound 0)

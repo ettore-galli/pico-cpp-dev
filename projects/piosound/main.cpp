@@ -3,6 +3,7 @@
 #include "hardware/pio.h"
 #include "pio_sound.pio.h"
 #include "hardware/clocks.h"
+#include "hardware/adc.h"
 
 // Funzione per inizializzare il programma PIO
 void pio_sound_program_init(PIO pio, uint sm, uint offset, uint pins[], uint number_of_pins)
@@ -49,9 +50,9 @@ int main()
 
     // Configura il pin 15 come output per il LED
     uint sm = pio_claim_unused_sm(pio, true);
-    uint pins[] = {15, 16, 17};
-
-    pio_sound_program_init(pio, sm, offset, pins, 3);
+    uint pins[] = {15};
+    uint number_of_pins = sizeof(pins)/sizeof(pins[0]);
+    pio_sound_program_init(pio, sm, offset, pins, number_of_pins);
 
     float base_step_freq = 100000.0f;
 
@@ -65,6 +66,13 @@ int main()
     float freq = 3 * BASE;
     uint8_t harmonic = 1;
     const uint8_t NUM_OF_HARMONICS = 15;
+
+    adc_init();
+    // Seleziona il pin di input ADC (ad esempio, GPIO 26)
+    adc_gpio_init(26);
+
+    // Seleziona il canale ADC (0 per GPIO 26, 1 per GPIO 27, ecc.)
+    adc_select_input(0);
 
     while (true)
     {

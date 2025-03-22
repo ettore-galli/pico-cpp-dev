@@ -5,19 +5,19 @@
     pull noblock
     mov x, osr
 
-        set pindirs, 1 
+        set pindirs, 0b1
         mov y, x
         set pins, 0     
     wait_low:
         jmp y--, wait_low
 
-        set pindirs, 0
+        set pindirs, 0b1
         mov y, x
         set pins, 1   
     wait_z:
         jmp y--, wait_z
 
-        set pindirs, 1 
+        set pindirs, 0b1  
         mov y, x
         set pins, 1   
     wait_high:
