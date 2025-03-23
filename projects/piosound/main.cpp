@@ -19,6 +19,12 @@ struct PioConfigurationData
     uint usedSoundPins;
 };
 
+struct ADCConfigurationData
+{
+    uint adcPin;
+    uint adcInput;
+};
+
 struct PioEnvironment
 {
     PIO pio;
@@ -80,9 +86,11 @@ uint16_t read_adc_average(uint8_t samples, uint8_t intra_sample_delay_ms)
     return sum / samples;
 }
 
-uint get_pio_state_machine()
+void configure_adc(const ADCConfigurationData &config)
 {
-    return 0;
+    adc_init();
+    adc_gpio_init(config.adcPin);
+    adc_select_input(config.adcInput);
 }
 
 int main()
@@ -90,18 +98,20 @@ int main()
 
     uint pins[] = {15};
     uint number_of_pins = sizeof(pins) / sizeof(pins[0]);
-
-    // Inizializza la libreria standard (per printf)
-    stdio_init_all();
+    float base_step_frequency = 100000.0f;
 
     PioConfigurationData pioConfigurationData{
         .pio = pio0,
         .soundPins = {15},
-        .usedSoundPins = 1};
+        .usedSoundPins = number_of_pins};
+
+    ADCConfigurationData adcConfigurationData{.adcPin = 26, .adcInput = 0};
+
+    // Inizializza la libreria standard (per printf)
+    stdio_init_all();
 
     PioEnvironment pioEnvironment = pio_sound_program_init(pioConfigurationData);
 
-    float base_step_frequency = 100000.0f;
     set_pio_base_step_frequency(pioEnvironment, base_step_frequency);
 
     uint32_t delay = 1;
@@ -109,9 +119,7 @@ int main()
     float BASE = 55.0f;
     float freq = 3 * BASE;
 
-    adc_init();
-    adc_gpio_init(26);
-    adc_select_input(0);
+    configure_adc(adcConfigurationData);
 
     while (true)
     {
