@@ -6,7 +6,16 @@ project(pico_sound)
 
 pico_sdk_init()
 
-add_executable(pico_sound main.cpp)
+set(SOURCES
+    main.cpp
+    pio_sound.cpp
+)
+
+set(HEADERS
+    pio_sound.h
+)
+
+add_executable(pico_sound ${SOURCES} ${HEADERS})
 
 pico_generate_pio_header(pico_sound ${CMAKE_CURRENT_SOURCE_DIR}/pio_sound.pio)
 
