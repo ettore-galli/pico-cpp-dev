@@ -25,6 +25,16 @@ struct PioEnvironment
     uint sm;
 };
 
+uint32_t calculate_delay(float base_step_freq, float freq)
+{
+    return (uint32_t)(base_step_freq / freq) / 2.0;
+}
+
+uint32_t calculate_divider(float base_step_freq, uint32_t clock_hz)
+{
+    return clock_hz / (base_step_freq * 2);
+}
+
 PioEnvironment pio_sound_program_init(const PioConfigurationData &config)
 {
 
@@ -53,14 +63,10 @@ PioEnvironment pio_sound_program_init(const PioConfigurationData &config)
     return PioEnvironment{.pio = config.pio, .sm = sm};
 }
 
-uint32_t calculate_delay(float base_step_freq, float freq)
+void set_pio_base_step_frequency(PioEnvironment pioEnvironment, float base_step_frequency)
 {
-    return (uint32_t)(base_step_freq / freq) / 2.0;
-}
-
-uint32_t calculate_divider(float base_step_freq, uint32_t clock_hz)
-{
-    return clock_hz / (base_step_freq * 2);
+    uint32_t divider = calculate_divider(base_step_frequency, clock_get_hz(clk_sys));
+    pio_sm_set_clkdiv(pioEnvironment.pio, pioEnvironment.sm, divider);
 }
 
 uint16_t read_adc_average(uint8_t samples, uint8_t intra_sample_delay_ms)
@@ -95,10 +101,8 @@ int main()
 
     PioEnvironment pioEnvironment = pio_sound_program_init(pioConfigurationData);
 
-    float base_step_freq = 100000.0f;
-
-    uint32_t divider = calculate_divider(base_step_freq, clock_get_hz(clk_sys));
-    pio_sm_set_clkdiv(pioEnvironment.pio, pioEnvironment.sm, divider);
+    float base_step_frequency = 100000.0f;
+    set_pio_base_step_frequency(pioEnvironment, base_step_frequency);
 
     uint32_t delay = 1;
 
@@ -119,7 +123,7 @@ int main()
 
         freq = (uint16_t)(BASE + 1000.0 * (pitch_input / 4096.0));
 
-        delay = calculate_delay(base_step_freq, freq);
+        delay = calculate_delay(base_step_frequency, freq);
         pio_sm_put(pioEnvironment.pio, pioEnvironment.sm, delay);
     }
 }
