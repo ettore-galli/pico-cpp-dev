@@ -41,7 +41,7 @@ int main()
 
         printf("adc: %d\n", pitch_input);
 
-        freq = (uint16_t)(BASE + 1000.0 * (pitch_input / 4096.0));
+        freq = (uint16_t)(BASE * (1 + pitch_input / 256));
 
         delay = calculate_delay(base_step_frequency, freq);
         pio_sm_put(pioEnvironment.pio, pioEnvironment.sm, delay);
