@@ -11,7 +11,7 @@ int main()
 
     uint pins[] = {15};
     uint number_of_pins = sizeof(pins) / sizeof(pins[0]);
-    float base_step_frequency = 100000.0f;
+    float base_step_frequency = 10000000.0f;
 
     PioConfigurationData pioConfigurationData{
         .pio = pio0,
@@ -39,11 +39,12 @@ int main()
 
         uint16_t pitch_input = read_adc_average(10, 1);
 
-        printf("adc: %d\n", pitch_input);
+        // printf("adc: %d\n", pitch_input);
 
         freq = (uint16_t)(BASE * (1 + pitch_input / 256));
 
         delay = calculate_delay(base_step_frequency, freq);
+        printf("delay: %d\n", delay);
         pio_sm_put(pioEnvironment.pio, pioEnvironment.sm, delay);
     }
 }
