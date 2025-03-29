@@ -16,10 +16,10 @@ uint32_t calculate_divider(float base_step_freq, uint32_t clock_hz)
     return clock_hz / (base_step_freq * 2);
 }
 
-PioEnvironment pio_sound_program_init(const PioConfigurationData &config)
+PioEnvironment pio_sound_program_init(const PioConfigurationData &config, const pio_program &pio_pgm)
 {
 
-    uint offset = pio_add_program(config.pio, &pio_sound_program);
+    uint offset = pio_add_program(config.pio, &pio_pgm);
     uint sm = pio_claim_unused_sm(config.pio, true);
 
     uint32_t mask = 0;

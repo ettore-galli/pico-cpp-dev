@@ -23,7 +23,7 @@ int main()
     // Inizializza la libreria standard (per printf)
     stdio_init_all();
 
-    PioEnvironment pioEnvironment = pio_sound_program_init(pioConfigurationData);
+    PioEnvironment pioEnvironment = pio_sound_program_init(pioConfigurationData, pio_sound_program);
     set_pio_base_step_frequency(pioEnvironment, base_step_frequency);
 
     configure_adc(adcConfigurationData);
