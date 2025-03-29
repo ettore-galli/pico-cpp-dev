@@ -3,7 +3,9 @@
         "stdlib.h": "c",
         "iosfwd": "cpp",
         "gpio.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "bitset": "cpp",
+        "random": "cpp"
     },
     "cmake.sourceDirectory": "/workspaces/pico-cpp-dev/pico-examples"
 }

@@ -13,10 +13,13 @@ int main()
     uint number_of_pins = sizeof(pins) / sizeof(pins[0]);
     float base_step_frequency = 10000000.0f;
 
-    PioConfigurationData pioConfigurationData{
+    PioConfigurationItem pioConfigurationItem{
         .pio = pio0,
         .soundPins = {15},
         .usedSoundPins = number_of_pins};
+
+    PioConfigurationData pioConfigurationData = {
+        pioConfigurationItem};
 
     ADCConfigurationData adcConfigurationData{.adcPin = 26, .adcInput = 0};
 
@@ -45,6 +48,6 @@ int main()
 
         delay = calculate_delay(base_step_frequency, freq);
         printf("delay: %d\n", delay);
-        pio_sm_put(pioEnvironment.pio, pioEnvironment.sm, delay);
+        pio_sm_put(pioEnvironment.items[0].pio, pioEnvironment.items[0].sm, delay);
     }
 }

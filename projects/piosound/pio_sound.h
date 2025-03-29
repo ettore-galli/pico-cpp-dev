@@ -7,7 +7,7 @@ uint32_t calculate_delay(float base_step_freq, float freq);
 
 uint32_t calculate_divider(float base_step_freq, uint32_t clock_hz);
 
-PioEnvironment pio_sound_program_init(const PioConfigurationData &config, const pio_program &pio_pgm);
+PioEnvironment pio_sound_program_init(const PioConfigurationData &configData, const pio_program &pio_pgm);
 
 void set_pio_base_step_frequency(PioEnvironment pioEnvironment, float base_step_frequency);
 
