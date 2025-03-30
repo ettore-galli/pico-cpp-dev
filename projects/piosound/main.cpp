@@ -9,17 +9,20 @@
 int main()
 {
 
-    uint pins[] = {15};
-    uint number_of_pins = sizeof(pins) / sizeof(pins[0]);
+    // uint pins[] = {15};
+    // uint number_of_pins = sizeof(pins) / sizeof(pins[0]);
     float base_step_frequency = 10000000.0f;
 
-    PioConfigurationItem pioConfigurationItem{
-        .pio = pio0,
-        .soundPins = {15},
-        .usedSoundPins = number_of_pins};
-
     PioConfigurationData pioConfigurationData = {
-        pioConfigurationItem};
+        PioConfigurationItem{
+            .pio = pio0,
+            .soundPins = {15, 16},
+            .usedSoundPins = 2},
+        PioConfigurationItem{
+            .pio = pio0,
+            .soundPins = {17, 18},
+            .usedSoundPins = 2},
+    };
 
     ADCConfigurationData adcConfigurationData{.adcPin = 26, .adcInput = 0};
 
@@ -45,9 +48,10 @@ int main()
         // printf("adc: %d\n", pitch_input);
 
         freq = (uint16_t)(BASE * (1 + pitch_input / 256));
-
         delay = calculate_delay(base_step_frequency, freq);
+
         printf("delay: %d\n", delay);
         pio_sm_put(pioEnvironment.items[0].pio, pioEnvironment.items[0].sm, delay);
+        pio_sm_put(pioEnvironment.items[1].pio, pioEnvironment.items[1].sm, delay);
     }
 }

@@ -6,12 +6,12 @@
     mov x, osr
 
         mov y, x
-        set pins, 0     
+        set pins, 0b00     
     wait_low:
         jmp y--, wait_low
 
         mov y, x
-        set pins, 1   
+        set pins, 0b11  
     wait_high:
         jmp y--, wait_high
 
