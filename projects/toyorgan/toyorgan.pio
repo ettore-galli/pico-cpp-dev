@@ -1,0 +1,38 @@
+.program toyorgan
+
+.wrap_target
+    set pins, 0b111 [31]
+    set pins, 0b110 [31]
+    set pins, 0b011 [31]
+    set pins, 0b000 [31]
+    set pins, 0b101 [31]
+    set pins, 0b100 [31]
+    set pins, 0b011 [31]
+    set pins, 0b010 [31]
+    set pins, 0b111 [31]
+    set pins, 0b100 [31]
+    set pins, 0b001 [31]
+    set pins, 0b000 [31]
+.wrap
+
+
+
+;.wrap_target
+;
+;    pull noblock
+;    mov x, osr
+
+        mov y, x
+        set pins, 0b00     
+;    wait_low:
+;        jmp y--, wait_low
+;
+;        mov y, x
+;        set pins, 0b11  
+;    wait_high:
+;        jmp y--, wait_high
+;
+;    delay:
+;        jmp y--, delay
+;
+;.wrap       
