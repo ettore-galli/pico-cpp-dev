@@ -12,12 +12,12 @@ int main()
     PioConfigurationData pioConfigurationData = {
         PioConfigurationItem{
             .pio = pio0,
-            .soundPins = {15, 16, 17, 18},
+            .soundPins = {15, 16, 17},
             .usedSoundPins = 4,
         },
         PioConfigurationItem{
             .pio = pio0,
-            .soundPins = {19, 20, 21, 22},
+            .soundPins = {18, 19, 20},
             .usedSoundPins = 4},
     };
 
