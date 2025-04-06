@@ -1,7 +1,7 @@
 #include "pico/stdlib.h"
 #include "hardware/pio.h"
 
-const uint NUMBER_OF_SM = 4;
+const uint NUMBER_OF_SM = 7;
 
 struct HardwareConfiguration
 {
@@ -13,6 +13,8 @@ struct HardwareConfiguration
 struct PioConfigurationItem
 {
     PIO pio;
+    uint sm;
+    double frequency;
     uint soundPins[5];
     uint usedSoundPins = 0;
 };
@@ -23,6 +25,7 @@ struct PioEnvironmentItem
 {
     PIO pio;
     uint sm = -1;
+    double frequency;
 };
 
 struct PioEnvironment

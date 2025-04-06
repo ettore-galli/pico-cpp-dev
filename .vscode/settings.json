@@ -5,7 +5,8 @@
         "gpio.h": "c",
         "stdio.h": "c",
         "bitset": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "cmath": "cpp"
     },
     "cmake.sourceDirectory": "/workspaces/pico-cpp-dev/pico-examples"
 }
